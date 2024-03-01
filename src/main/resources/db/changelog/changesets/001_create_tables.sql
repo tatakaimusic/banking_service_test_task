@@ -9,9 +9,9 @@ CREATE TABLE IF NOT EXISTS production.accounts
 CREATE TABLE IF NOT EXISTS production.users
 (
     id            BIGINT PRIMARY KEY,
-    username      VARCHAR NOT NULL UNIQUE,
-    password      VARCHAR NOT NULL,
-    name          VARCHAR NOT NULL,
+    username      VARCHAR(36) NOT NULL UNIQUE,
+    password      VARCHAR(36) NOT NULL,
+    name          VARCHAR(100) NOT NULL,
     email         VARCHAR NOT NULL UNIQUE,
     phone_number  VARCHAR NOT NULL UNIQUE,
     date_of_birth DATE    NOT NULL,

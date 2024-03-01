@@ -1,18 +1,18 @@
 version: "1"
 
 volumes:
-  db_data:
+  db-data:
     driver: local
 
 
 services:
   db:
     image: postgres:15.1-alpine
-    container_name: postgres_banking
+    container_name: postgres_banking_db
     ports:
       - "5437:5432"
     env_file:
       - .env
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
 
