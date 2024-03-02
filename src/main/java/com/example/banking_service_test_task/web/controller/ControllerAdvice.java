@@ -33,4 +33,10 @@ public class ControllerAdvice {
         return new ExceptionBody(e.getMessage());
     }
 
+    @ExceptionHandler(IllegalStateException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionBody handleIllegalState(IllegalStateException e) {
+        return new ExceptionBody(e.getMessage());
+    }
+
 }

@@ -58,6 +58,13 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalStateException("User with this username already exist!");
         }
+        if (userRepository.getUserByEmail(user.getEmail()).isPresent()) {
+            throw new IllegalStateException("User with this email already exist!");
+        }
+        if (userRepository.getUserByPhoneNumber(user.getPhoneNumber()).isPresent()) {
+            throw new IllegalStateException("User with this phone number already exist!");
+        }
+
         account.setInitPayment(account.getAmount());
         account = accountService.create(account);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
