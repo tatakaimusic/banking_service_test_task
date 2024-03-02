@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalStateException("User with this username already exist!");
         }
+        account.setInitPayment(account.getAmount());
         account = accountService.create(account);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User createdUser = userRepository.save(user);

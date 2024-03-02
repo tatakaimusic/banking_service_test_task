@@ -8,12 +8,21 @@ import jakarta.persistence.Table;
 public class Account extends AbstractEntity {
 
     private double amount;
+    private double initPayment;
 
     public Account() {
     }
 
     public Account(double amount) {
         this.amount = amount;
+    }
+
+    public double getInitPayment() {
+        return initPayment;
+    }
+
+    public void setInitPayment(double initPayment) {
+        this.initPayment = initPayment;
     }
 
     public double getAmount() {
