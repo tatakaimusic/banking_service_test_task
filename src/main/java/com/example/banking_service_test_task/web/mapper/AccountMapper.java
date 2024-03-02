@@ -6,6 +6,6 @@ import org.mapstruct.Mapper;
 import org.springframework.stereotype.Component;
 
 @Component
-@Mapper
+@Mapper(componentModel = "spring")
 public interface AccountMapper extends Mappable<Account, AccountDTO> {
 }

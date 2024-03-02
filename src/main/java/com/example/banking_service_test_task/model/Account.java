@@ -9,6 +9,13 @@ public class Account extends AbstractEntity {
 
     private double amount;
 
+    public Account() {
+    }
+
+    public Account(double amount) {
+        this.amount = amount;
+    }
+
     public double getAmount() {
         return amount;
     }

@@ -18,7 +18,7 @@ public class UserDTO extends AbstractEntityDTO {
             groups = {OnCreate.class, OnUpdate.class}
     )
     @Length(
-            max = 36,
+            max = 100,
             message = "Username must be smaller than 36 symbols!",
             groups = {OnCreate.class, OnUpdate.class}
     )
@@ -29,7 +29,7 @@ public class UserDTO extends AbstractEntityDTO {
             groups = {OnCreate.class, OnUpdate.class}
     )
     @Length(
-            max = 36,
+            max = 100,
             message = "Password must be smaller than 36 symbols!",
             groups = {OnCreate.class, OnUpdate.class}
     )
@@ -74,6 +74,12 @@ public class UserDTO extends AbstractEntityDTO {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
+
+    @NotNull(
+            message = "Amount must be not null!",
+            groups = {OnCreate.class, OnUpdate.class}
+    )
+    private double amount;
 
     public String getUsername() {
         return username;
@@ -123,4 +129,11 @@ public class UserDTO extends AbstractEntityDTO {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 }
