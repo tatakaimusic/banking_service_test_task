@@ -1,0 +1,2 @@
+ALTER TABLE accounts
+ADD init_payment NUMERIC NOT NULL DEFAULT 0

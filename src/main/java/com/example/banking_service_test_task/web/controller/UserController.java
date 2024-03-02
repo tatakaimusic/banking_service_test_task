@@ -27,7 +27,7 @@ public class UserController {
     @PutMapping("/{id}/update/email")
     public UserDTO updateEmailByUserId(
             @PathVariable Long id,
-            @RequestParam(value = "email", required = false) @Email String email
+            @RequestParam(value = "email") @Email String email
     ) {
         User user = userService.updateEmail(id, email);
         return userMapper.toDto(user);
@@ -36,7 +36,7 @@ public class UserController {
     @PutMapping("/{id}/update/phone")
     public UserDTO updatePhoneNumberByUserId(
             @PathVariable Long id,
-            @RequestParam(value = "phone", required = false)
+            @RequestParam(value = "phone")
             @Pattern(
                     regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$"
             ) String phoneNumber
@@ -49,7 +49,7 @@ public class UserController {
     public void transaction(
             @PathVariable Long fromId,
             @PathVariable Long toId,
-            @RequestParam(value = "amount", required = false) double amount
+            @RequestParam(value = "amount") double amount
     ) {
         userService.transaction(fromId, toId, amount);
     }

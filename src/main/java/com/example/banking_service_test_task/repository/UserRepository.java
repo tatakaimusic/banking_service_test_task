@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -44,5 +46,17 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> getUserByEmail(String email);
 
     Optional<User> getUserByPhoneNumber(String phoneNumber);
+
+    @Query(value = """
+            SELECT * FROM users 
+            WHERE date_of_birth > :birth
+                        """, nativeQuery = true)
+    List<User> filterUsersByBirth(Date birth);
+
+    @Query(value = """
+            SELECT * FROM users
+            WHERE name LIKE :name
+                        """, nativeQuery = true)
+    List<User> filterByUserName(String name);
 
 }
