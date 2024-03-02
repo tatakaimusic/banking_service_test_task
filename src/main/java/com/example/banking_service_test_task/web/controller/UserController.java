@@ -53,4 +53,10 @@ public class UserController {
     ) {
         userService.transaction(fromId, toId, amount);
     }
+
+    @GetMapping("/{id}/balance")
+    public double getBalance(@PathVariable Long id) {
+        return userService.getBalance(id);
+    }
+
 }
