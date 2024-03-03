@@ -2,6 +2,7 @@ package com.example.banking_service_test_task.web.controller;
 
 import com.example.banking_service_test_task.model.exception.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -31,6 +32,13 @@ public class ControllerAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ExceptionBody handleResourceTaken(ResourceTakenException e) {
         return new ExceptionBody(e.getMessage());
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ExceptionBody handleBadCredentials(AuthenticationException e) {
+        e.printStackTrace();
+        return new ExceptionBody("Authentication failed!");
     }
 
     @ExceptionHandler(IllegalStateException.class)

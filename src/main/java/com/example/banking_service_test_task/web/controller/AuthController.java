@@ -10,6 +10,7 @@ import com.example.banking_service_test_task.web.dto.auth.JwtResponse;
 import com.example.banking_service_test_task.web.dto.validation.OnCreate;
 import com.example.banking_service_test_task.web.mapper.AccountMapper;
 import com.example.banking_service_test_task.web.mapper.UserMapper;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/app/auth")
 @Validated
+@Tag(name = "Auth controller")
 public class AuthController {
 
     private final AuthService authService;

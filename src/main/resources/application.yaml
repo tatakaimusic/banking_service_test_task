@@ -20,4 +20,6 @@ security:
     access: ${JWT_ACCESS}
     refresh: ${JWT_REFRESH}
 
+springdoc:
+  override-with-generic-response: false
 

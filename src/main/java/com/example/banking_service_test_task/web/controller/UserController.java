@@ -4,6 +4,7 @@ import com.example.banking_service_test_task.model.User;
 import com.example.banking_service_test_task.service.UserService;
 import com.example.banking_service_test_task.web.dto.UserDTO;
 import com.example.banking_service_test_task.web.mapper.UserMapper;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/app")
 @Validated
+@Tag(name = "User controller")
 public class UserController {
 
     private final UserService userService;

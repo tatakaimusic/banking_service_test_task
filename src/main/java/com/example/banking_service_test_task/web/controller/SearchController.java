@@ -6,10 +6,12 @@ import com.example.banking_service_test_task.web.dto.validation.OnCreate;
 import com.example.banking_service_test_task.web.dto.validation.OnUpdate;
 import com.example.banking_service_test_task.web.mapper.UserMapper;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +22,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/app/search")
+@Validated
+@Tag(name = "Search controller")
 public class SearchController {
 
     private final SearchService searchService;

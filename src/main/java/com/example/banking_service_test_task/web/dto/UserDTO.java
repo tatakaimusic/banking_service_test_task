@@ -3,6 +3,7 @@ package com.example.banking_service_test_task.web.dto;
 import com.example.banking_service_test_task.web.dto.validation.OnCreate;
 import com.example.banking_service_test_task.web.dto.validation.OnUpdate;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -11,8 +12,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
+@Schema(description = "User DTO")
 public class UserDTO extends AbstractEntityDTO {
 
+    @Schema(description = "username", example = "Bob")
     @NotNull(
             message = "Username must be not null!",
             groups = {OnCreate.class, OnUpdate.class}
@@ -24,6 +27,7 @@ public class UserDTO extends AbstractEntityDTO {
     )
     private String username;
 
+    @Schema(description = "password", example = "12345")
     @NotNull(
             message = "Password must be not null!",
             groups = {OnCreate.class, OnUpdate.class}
@@ -35,6 +39,7 @@ public class UserDTO extends AbstractEntityDTO {
     )
     private String password;
 
+    @Schema(description = "name", example = "Bob")
     @NotNull(
             message = "Name must be not null!",
             groups = {OnCreate.class, OnUpdate.class}
@@ -46,6 +51,7 @@ public class UserDTO extends AbstractEntityDTO {
     )
     private String name;
 
+    @Schema(description = "email", example = "bob@mail.ru")
     @Email(
             message = "Email must has an email format!",
             groups = {OnCreate.class, OnUpdate.class}
@@ -56,6 +62,7 @@ public class UserDTO extends AbstractEntityDTO {
     )
     private String email;
 
+    @Schema(description = "Phone number", example = "89771983512")
     @Pattern(
             regexp = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$",
             message = "Phone number must be Russian format!",
@@ -67,6 +74,7 @@ public class UserDTO extends AbstractEntityDTO {
     )
     private String phoneNumber;
 
+    @Schema(description = "Date of birth", example = "2003-02-26")
     @NotNull(
             message = "Date of birth must be not null!",
             groups = {OnCreate.class, OnUpdate.class}
@@ -75,6 +83,7 @@ public class UserDTO extends AbstractEntityDTO {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dateOfBirth;
 
+    @Schema(description = "amount", example = "100")
     @NotNull(
             message = "Amount must be not null!",
             groups = {OnCreate.class, OnUpdate.class}
