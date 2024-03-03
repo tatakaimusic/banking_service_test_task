@@ -8,6 +8,7 @@ import com.example.banking_service_test_task.model.exception.ResourceTakenExcept
 import com.example.banking_service_test_task.repository.UserRepository;
 import com.example.banking_service_test_task.service.AccountService;
 import com.example.banking_service_test_task.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional(readOnly = true)
+@Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByUsername(String username) {
+        log.info("Find user by username: " + username);
         return userRepository.findByUsername(username)
                 .orElseThrow(
                         () -> new ResourceNotFoundException(
@@ -44,6 +47,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getById(Long id) {
+        log.info("Find user by id: " + id);
         return userRepository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException(
@@ -55,6 +59,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User create(User user, Account account) {
+        log.info("Create user with username: " + user.getUsername() + " and amount: " + account.getAmount());
         if (userRepository.findByUsername(user.getUsername()).isPresent()) {
             throw new IllegalStateException("User with this username already exist!");
         }
@@ -76,12 +81,14 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User update(User user) {
+        log.info("Update user with id: " + user.getId());
         return userRepository.save(user);
     }
 
     @Transactional
     @Override
     public User updateEmail(Long id, String email) {
+        log.info("Update user email: " + email + " with id: " + id);
         if (emailExisted(email)) {
             throw new ResourceTakenException("This email already exist!");
         }
@@ -93,6 +100,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User updatePhoneNumber(Long id, String phoneNumber) {
+        log.info("Update user phone number: " + phoneNumber + " with id: " + id);
         if (phoneNumberExisted(phoneNumber)) {
             throw new ResourceTakenException("This phone number already exist!");
         }
@@ -103,18 +111,21 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public double getBalance(Long userId) {
+        log.info("Get user balance by id: " + userId);
         return userRepository.getBalanceByUserId(userId);
     }
 
     @Transactional
     @Override
     public void updateBalance(Long userId, double amount) {
+        log.info("Update balance: " + amount + " by id:" + userId);
         userRepository.updateBalanceByUserId(userId, amount);
     }
 
     @Transactional
     @Override
     public void transaction(Long fromId, Long toId, double amount) {
+        log.info("Transaction:" + amount + " from user with id: " + fromId + " to user with id: " + toId);
         double balanceFrom = getBalance(fromId);
         double balanceTo = getBalance(toId);
         if ((balanceFrom - amount) < 0) {

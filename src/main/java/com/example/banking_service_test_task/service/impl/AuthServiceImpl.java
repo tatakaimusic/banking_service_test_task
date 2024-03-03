@@ -6,11 +6,13 @@ import com.example.banking_service_test_task.service.UserService;
 import com.example.banking_service_test_task.web.dto.auth.JwtRequest;
 import com.example.banking_service_test_task.web.dto.auth.JwtResponse;
 import com.example.banking_service_test_task.web.security.JwtTokenProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 public class AuthServiceImpl implements AuthService {
 
@@ -31,6 +33,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public JwtResponse login(JwtRequest loginRequest) {
+        log.info("Login user with username: " + loginRequest.getUsername());
         JwtResponse jwtResponse = new JwtResponse();
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -56,6 +59,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public JwtResponse refresh(String refreshToken) {
+        log.info("Refresh tokens by refresh token: " + refreshToken);
         return jwtTokenProvider.refreshUserTokens(refreshToken);
     }
+
 }
