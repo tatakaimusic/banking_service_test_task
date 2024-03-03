@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,7 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
+    @PreAuthorize("@customSecurityExpression.canAccessUser(#id)")
     @PutMapping("/{id}/update/email")
     public UserDTO updateEmailByUserId(
             @PathVariable Long id,
@@ -35,6 +37,7 @@ public class UserController {
         return userMapper.toDto(user);
     }
 
+    @PreAuthorize("@customSecurityExpression.canAccessUser(#id)")
     @PutMapping("/{id}/update/phone")
     public UserDTO updatePhoneNumberByUserId(
             @PathVariable Long id,
@@ -47,6 +50,7 @@ public class UserController {
         return userMapper.toDto(user);
     }
 
+    @PreAuthorize("@customSecurityExpression.canAccessUser(#fromId)")
     @PostMapping("/{fromId}/{toId}/transaction")
     public void transaction(
             @PathVariable Long fromId,
@@ -56,6 +60,7 @@ public class UserController {
         userService.transaction(fromId, toId, amount);
     }
 
+    @PreAuthorize("@customSecurityExpression.canAccessUser(#id)")
     @GetMapping("/{id}/balance")
     public double getBalance(@PathVariable Long id) {
         return userService.getBalance(id);
