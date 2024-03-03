@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Objects;
+
 @Service
 @Transactional(readOnly = true)
 @Slf4j
@@ -126,6 +128,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void transaction(Long fromId, Long toId, double amount) {
         log.info("Transaction:" + amount + " from user with id: " + fromId + " to user with id: " + toId);
+        if (Objects.equals(fromId, toId)) {
+            throw new IllegalStateException("User to whom the money is being sent must be different!");
+        }
         double balanceFrom = getBalance(fromId);
         double balanceTo = getBalance(toId);
         if ((balanceFrom - amount) < 0) {
