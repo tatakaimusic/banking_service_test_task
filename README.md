@@ -12,4 +12,5 @@
 3. Запустите com/example/banking_service_test_task/BankingServiceTestTaskApplication.java
 
 
-Все пользователи в базе данных имеют пароль 12345.
+Все пользователи в базе данных имеют пароль 12345. <br />
+Для использования auth api не нужно аунтефикация, для создания новых пользователей использовать endpoint htpps://localhost:8080/app/auth/register  
