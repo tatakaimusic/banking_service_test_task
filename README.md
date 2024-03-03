@@ -1,5 +1,5 @@
 ЗАПУСК ПРИЛОЖЕНИЯ:
-1. Создайте .env файл с такими переменными:
+1. Создайте .env файл с такими переменными: <br />
      HOST=localhost:5437 <br />
      POSTGRES_DB=banking <br />
      POSTGRES_USERNAME=postgres <br />
